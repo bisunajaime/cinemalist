@@ -1,4 +1,4 @@
-# TMDB Tutorial Pt 1
+# TMDB Tutorial
 
 Youtube: https://www.youtube.com/watch?v=VfOMmG9REsw
 
