@@ -43,7 +43,7 @@ class Movie extends Equatable {
       original_language: json['original_language'],
       original_title: json['original_title'],
       overview: json['overview'],
-      popularity: json['popularity'],
+      popularity: json['popularity'].toDouble(),
       poster_path: json['poster_path'],
       release_date: json['release_date'],
       title: json['title'],

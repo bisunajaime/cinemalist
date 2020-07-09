@@ -81,7 +81,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
                   movies: currentState.movies + movies,
                 );
         }
-      } catch (_) {
+      } catch (e) {
+        print(e);
         yield MovieFailed();
       }
     }

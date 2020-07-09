@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb_tutorial/bloc/movies_bloc.dart';
 import 'package:tmdb_tutorial/models/Movie.dart';
+import 'package:tmdb_tutorial/views/movies/movie_details_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -90,66 +91,76 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                return Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Stack(
-                    children: <Widget>[
-                      ShaderMask(
-                        shaderCallback: (rect) {
-                          return LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.black,
-                              Colors.transparent,
-                            ],
-                          ).createShader(
-                            Rect.fromLTRB(
-                              0,
-                              0,
-                              rect.width,
-                              rect.height,
-                            ),
-                          );
-                        },
-                        blendMode: BlendMode.dstIn,
-                        child: Image(
-                          height: double.infinity,
-                          width: double.infinity,
-                          image: NetworkImage(
-                              'https://image.tmdb.org/t/p/w500${state.movies[i].poster_path}'),
-                          fit: BoxFit.cover,
-                        ),
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MovieDetailsPage(
+                        id: state.movies[i].id,
                       ),
-                      Positioned(
-                        bottom: 20,
-                        left: 10,
-                        right: 10,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .8,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                state.movies[i].title,
-                                style: TextStyle(
-                                  color: Colors.pinkAccent[100],
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    ),
+                  ),
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: Stack(
+                      children: <Widget>[
+                        ShaderMask(
+                          shaderCallback: (rect) {
+                            return LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.black,
+                                Colors.transparent,
+                              ],
+                            ).createShader(
+                              Rect.fromLTRB(
+                                0,
+                                0,
+                                rect.width,
+                                rect.height,
                               ),
-                              Text(
-                                state.movies[i].overview,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                            );
+                          },
+                          blendMode: BlendMode.dstIn,
+                          child: Image(
+                            height: double.infinity,
+                            width: double.infinity,
+                            image: NetworkImage(
+                                'https://image.tmdb.org/t/p/w500${state.movies[i].poster_path}'),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      )
-                    ],
+                        Positioned(
+                          bottom: 20,
+                          left: 10,
+                          right: 10,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .8,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  state.movies[i].title,
+                                  style: TextStyle(
+                                    color: Colors.pinkAccent[100],
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  state.movies[i].overview,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
